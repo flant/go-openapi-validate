@@ -72,7 +72,7 @@ func NewSchemaValidator(schema *spec.Schema, rootSchema interface{}, root string
 			panic(msg)
 		}
 	}
-	s := SchemaValidator{Path: root, in: "body", Schema: schema, Root: rootSchema, KnownFormats: formats, Options: &SchemaValidatorOptions{}}
+	s := SchemaValidator{Path: root, in: "", Schema: schema, Root: rootSchema, KnownFormats: formats, Options: &SchemaValidatorOptions{}}
 	for _, o := range options {
 		o(s.Options)
 	}
