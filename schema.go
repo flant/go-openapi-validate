@@ -74,7 +74,7 @@ func NewSchemaValidator(schema *spec.Schema, rootSchema interface{}, root string
 	}
 	s := SchemaValidator{
 		Path:         root,
-		in:           "body",
+		in:           "",
 		Schema:       schema,
 		Root:         rootSchema,
 		KnownFormats: formats,
@@ -82,6 +82,8 @@ func NewSchemaValidator(schema *spec.Schema, rootSchema interface{}, root string
 	for _, o := range options {
 		o(&s.Options)
 	}
+	//s.in = s.Options.In
+
 	s.validators = []valueValidator{
 		s.typeValidator(),
 		s.schemaPropsValidator(),
