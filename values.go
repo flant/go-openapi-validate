@@ -370,20 +370,8 @@ func MinimumNativeType(path, in string, val interface{}, min float64, exclusive 
 //
 // TODO: Normally, a JSON MAX_SAFE_INTEGER check would ensure conversion remains loss-free
 func MultipleOfNativeType(path, in string, val interface{}, multipleOf float64) *errors.Validation {
-	kind := reflect.ValueOf(val).Type().Kind()
-	switch kind {
-	case reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64:
-		value := valueHelp.asInt64(val)
-		return MultipleOfInt(path, in, value, int64(multipleOf))
-	case reflect.Uint, reflect.Uint8, reflect.Uint16, reflect.Uint32, reflect.Uint64:
-		value := valueHelp.asUint64(val)
-		return MultipleOfUint(path, in, value, uint64(multipleOf))
-	case reflect.Float32, reflect.Float64:
-		fallthrough
-	default:
-		value := valueHelp.asFloat64(val)
-		return MultipleOf(path, in, value, multipleOf)
-	}
+	value := valueHelp.asFloat64(val)
+	return MultipleOf(path, in, value, multipleOf)
 }
 
 // IsValueValidAgainstRange checks that a numeric value is compatible with
